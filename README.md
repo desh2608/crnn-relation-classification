@@ -1,2 +1,2 @@
 # crnn-relation-classification
-Tensorflow implementation of the Convolutional Recurrent Neural Network model with max pooling and attentive pooling, for relation classification on biomedical text.
+This is the code for our paper "Learning local and global contexts using a convolutional recurrent network model for relation classification in biomedical text (Desh Raj, Sunil Kumar Sahu, and Ashish Anand)" to be published in the proceedings of CoNLL 2017.
