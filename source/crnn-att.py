@@ -54,14 +54,14 @@ class Model(object):
 			tmp1 = tf.matmul(tf.reshape(h1_cnn, shape=[-1, num_filters2]), W_a1, name="Wy") 	# NMx100
 			h2_cnn = tf.reshape(tmp1, shape=[-1, seq_len-(filter1_size-1)-(filter2_size-1), num_filters2])		 		#NxMx100
 
-			M = tf.nn.relu(h2_cnn)									# NxMx100
+			M = tf.tanh(h2_cnn)									# NxMx100
 			W_a2 = tf.get_variable("W_a2", shape=[num_filters2, 1]) 				# 100 x 1
 			tmp3 = tf.matmul(tf.reshape(M, shape=[-1, num_filters2]), W_a2)  		# NMx1
 			alpha = tf.nn.softmax(tf.reshape(tmp3, shape=[-1, seq_len-(filter1_size-1)-(filter2_size-1)], name="att"))	# NxM	
 			self.ret_alpha = alpha
 
 			alpha = tf.expand_dims(alpha, 1) 						# Nx1xM
-			h2_pool =  tf.matmul(alpha, h2_cnn, name="r")
+			h2_pool = tf.matmul(alpha, tf.reshape(h1_cnn, shape=[-1, seq_len-(filter1_size-1)-(filter2_size-1), num_filters2]), name="r")
 			
 		
 		##Dropout
